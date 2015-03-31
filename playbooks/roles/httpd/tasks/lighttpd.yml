@@ -1,0 +1,5 @@
+---
+- name: Disable Apache service
+  service: name=apache2 running=no state=stopped
+- name: Install Lighttpd
+  apt: name=lighttpd state=present

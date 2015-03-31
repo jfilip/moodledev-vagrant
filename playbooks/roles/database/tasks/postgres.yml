@@ -1,0 +1,5 @@
+---
+- name: Install PostgreSQL
+  apt: name=postgresql-9.3 state=present
+- name: Disale MariaDB / MySQL service
+  service: name=mysql enabled=no state=stopped

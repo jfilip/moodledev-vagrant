@@ -1,0 +1,13 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    # Valid values lighttpd|apache
+    httpd_server: 'apache'
+    # Valid values: postgres|mariadb|mysql
+    database_server: 'mariadb'
+  roles:
+    - common
+    - database
+    - httpd
+    - php

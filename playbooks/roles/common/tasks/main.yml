@@ -1,0 +1,6 @@
+- name: Enable user's locale
+  locale_gen: name={{ user_locale }}
+- name: Update APT cache
+  apt:
+    update_cache=yes
+    cache_valid_time=3600
