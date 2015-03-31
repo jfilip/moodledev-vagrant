@@ -1,0 +1,20 @@
+---
+- name: Autoremove packages
+  command: apt-get autoremove
+
+- name: Reload MariaDB service
+  service: name=mysql enabled=yes state=reloaded
+
+- name: Reload PostgreSQL service
+  service: name=postgresql enabled=yes state=reloaded
+
+- name: Reload MySQL service
+  service: name=mysql enabled=yes state=reloaded
+
+- name: Disable MySQL service
+  service: name=mysql enabled=no state=stopped
+  ignore_errors: true
+
+- name: Disable PostgreSQL service
+  service: name=postgresql enabled=no state=stopped
+  ignore_errors: true

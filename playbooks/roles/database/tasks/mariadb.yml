@@ -1,5 +1,13 @@
 ---
-#- name: Disable PostgreSQL service
-#  service: name=postgres enabled=no state=stopped
+- name: Uninstall MySQL
+  apt: name=mysql-server state=absent
+  ignore_errors: true
+
+- name: Autoremove packages
+  command: apt-get autoremove -y
+
 - name: Install MariaDB
   apt: name=mariadb-server state=present
+  notify:
+  - Disable PostgreSQL service
+  - Reload MariaDB service

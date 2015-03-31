@@ -1,6 +1,7 @@
 ---
 - name: Disable Lighttpd service
   service: name=lighttpd enabled=no state=stopped
+  ignore_errors: true
 
 - name: Install apache
   apt: name=apache2 state=present
