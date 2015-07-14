@@ -1,7 +1,11 @@
 ---
+- include: install_checks.yml
+
 - include: mariadb.yml
   when: database_server == 'mariadb'
+
 - include: postgres.yml
   when: database_server == 'postgres'
+
 - include: mysql.yml
   when: database_server == 'mysql'

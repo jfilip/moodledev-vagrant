@@ -3,9 +3,9 @@
   sudo: true
   vars:
     # Valid values lighttpd|apache
-    httpd_server: 'apache'
+    httpd_server: 'lighttpd'
     # Valid values: postgres|mariadb|mysql
-    database_server: 'mariadb'
+    database_server: 'postgres'
   roles:
     - common
     - database

@@ -1,0 +1,10 @@
+---
+- name: Check if Apache is installed
+  shell: dpkg-query -l apache2
+  register: apache_installed
+  failed_when: apache_installed.rc > 1
+
+- name: Check if Lighttpd is installed
+  shell: dpkg-query -l lighttpd
+  register: lighttpd_installed
+  failed_when: lighttpd_installed.rc > 1

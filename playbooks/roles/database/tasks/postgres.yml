@@ -1,6 +1,15 @@
 ---
 - name: Install PostgreSQL
-  apt: name=postgresql-9.3 state=present
+  apt: name={{ item }} state=present
+  with_items:
+    - postgresql-9.4
+    - postgresql-client-9.4
+    - libpq-dev
+    - python-psycopg2
   notify:
   - Disable MySQL service
   - Reload PostgreSQL service
+- name: Setup moodledev DB user
+  postgresql_user: name=moodledev password=moodledev role_attr_flags=CREATEDB,NOSUPERUSER
+  sudo: yes
+  sudo_user: postgres

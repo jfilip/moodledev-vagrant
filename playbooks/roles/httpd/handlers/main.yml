@@ -1,3 +1,19 @@
 ---
-- include: apache.yml
-  when: httpd_server == 'apache'
+# - name: Disable httpd services
+#   service: name=apache2 enabled=no state=stopped when: apache_installed.rc == 0
+#   service: name=lighttpd enabled=no state=stopped when: lighttpd_installed.rc == 0
+
+- name: Reload Apache
+  service: name=apache2 enabled=yes state=reloaded
+  ignore_errors: yes
+
+- name: Reload Lighttpd
+  service: name=lighttpd enabled=yes state=reloaded
+
+- name: Disable Apache service
+  service: name=apache enabled=no state=stopped
+  when: apache_installed.rc == 0
+
+- name: Disable Lighttpd service
+  service: name=lighttpd enabled=no state=stopped
+  when: lighttpd_installed.rc == 0

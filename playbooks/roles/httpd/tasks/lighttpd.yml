@@ -1,7 +1,5 @@
 ---
-- name: Disable Apache service
-  service: name=apache2 running=no state=stopped
-  ignore_errors: yes
-
 - name: Install Lighttpd
   apt: name=lighttpd state=present
+  notify:
+  - Disable Apache service

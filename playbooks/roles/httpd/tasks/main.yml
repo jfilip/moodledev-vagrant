@@ -1,5 +1,8 @@
 ---
+- include: install_checks.yml
+
 - include: apache.yml
   when: httpd_server == 'apache'
+
 - include: lighttpd.yml
   when: httpd_server == 'lighttpd'

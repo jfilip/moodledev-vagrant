@@ -1,10 +1,12 @@
 ---
-- name: Disable Lighttpd service
-  service: name=lighttpd enabled=no state=stopped
-  ignore_errors: true
+# - name: Disable non-Apache httpd servers
+#   notify:
+#   - Disable httpd services
 
-- name: Install apache
+- name: Install Apache
   apt: name=apache2 state=present
+  notify:
+  - Disable Lighttpd service
 
 - name: Add new Vagrant virtual host config
   template:
@@ -13,14 +15,14 @@
   notify:
   - Reload Apache
 
-- name: Remove the default virtual host
+- name: Remove the Apache default virtual host
   file:
     path=/etc/apache2/sites-enabled/000-default.conf
     state=absent
   notify:
   - Reload Apache
 
-- name: Enable our Vagrant virtual host config
+- name: Enable our Vagrant Apache virtual host config
   file:
    src=/etc/apache2/sites-available/vagrant.conf
    dest=/etc/apache2/sites-enabled/vagrant.conf
